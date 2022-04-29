@@ -16,6 +16,11 @@ let hbs = expressHbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
+//Set up routes
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
 
 //Set server port and start server
 app.set('port', process.env.PORT || 5000);
