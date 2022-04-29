@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/blog', (req, res) => {
+  res.render('blog');
+})
+
 
 //Set server port and start server
 app.set('port', process.env.PORT || 5000);
