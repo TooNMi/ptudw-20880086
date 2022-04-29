@@ -1,0 +1,14 @@
+{
+  "name": "ptudw-20880086",
+  "version": "1.0.0",
+  "description": "Project PTUDW",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nguyen Minh Tu - 20880086",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
