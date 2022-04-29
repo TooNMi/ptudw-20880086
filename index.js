@@ -21,8 +21,19 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/blog', (req, res) => {
-  res.render('blog');
+app.get('/:page', (req, res) => {
+  let banners = {
+    blog: 'Out Blog',
+    category: 'Shop Category',
+    cart: 'Shopping Cart',
+    checkout: 'Product Checkout',
+    confirmation: 'Order Confirmation',
+    contact: 'Contact Us',
+    login: 'Login / Register',
+    register: 'Register'
+  }
+  let page = req.params.page;
+  res.render(page, {banner: banners[page]});
 })
 
 
