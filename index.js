@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+//Route for pages with banner
 app.get('/:page', (req, res) => {
   let banners = {
     blog: 'Out Blog',
@@ -30,7 +31,10 @@ app.get('/:page', (req, res) => {
     confirmation: 'Order Confirmation',
     contact: 'Contact Us',
     login: 'Login / Register',
-    register: 'Register'
+    register: 'Register', 
+    'single-blog': 'Blog Details',
+    'single-product': 'Shop Single',
+    'tracking-order': 'Order Tracking'
   }
   let page = req.params.page;
   res.render(page, {banner: banners[page]});
