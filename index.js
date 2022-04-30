@@ -24,9 +24,13 @@ app.get('/', (req, res) => {
 //Sync database
 app.get('/sync', (req, res) => {
   let models = require('./models');
-  models.sequelize.sync()
-  .then(() => {
-    res.send('Database sync completed!')
+
+  console.log('Trying to connect to DB...')
+  
+  models.sequelize.sync().then(() => {
+    res.send('Database sync completed!');
+  }).catch((err) => {
+    console.log(err);
   });
 });
 
