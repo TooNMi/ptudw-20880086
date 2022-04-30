@@ -1,8 +1,6 @@
 let controller = {};
 let models = require('../models');
 let Product = models.Product;
-let Sequelize = require('sequelize');
-let Op = Sequelize.Op;
 
 controller.getTrendingProducts = () => {
   return new Promise((resolve, reject) => {
@@ -25,12 +23,7 @@ controller.getAll = (query) => {
     let options = {
       include: [{ model: models.Category}],
       attributes: ['id', 'name', 'imagepath', 'price'],
-      where: {
-        price: {
-          [Op.gte]: query.min,
-          [Op.lte]: query.max
-        }
-      }
+      where: {}
     };
 
     if(query.category > 0) {
