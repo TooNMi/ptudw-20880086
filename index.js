@@ -17,16 +17,15 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 //Set up routes
-app.get('/', (req, res) => {
-  res.render('index');
-});
+app.use('/', require('./routes/indexRouter'));
+app.use('/products', require('./routes/productRouter'));
 
 //Sync database
 app.get('/sync', (req, res) => {
   let models = require('./models');
 
   console.log('Trying to connect to DB...')
-  
+
   models.sequelize.sync().then(() => {
     res.send('Database sync completed!');
   }).catch((err) => {
