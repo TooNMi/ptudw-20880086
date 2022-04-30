@@ -1,3 +1,4 @@
+<script src="/vendors/nouislider/nouislider.min.js"></script>
 {{> banner }}
 
 	<!-- ================ category section start ================= -->		  
@@ -12,7 +13,7 @@
                 <form action="#">
                   <ul>
                     {{#each categories}}
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="category{{id}}" name="brand"><label for="category{{id}}" onclick="selectParam('category', {{id}}, true)">{{name}}<span> ({{Products.length}})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="category{{id}}" name="category"><label for="category{{id}}" onclick="selectParam('category', {{id}}, true)">{{name}}<span> ({{Products.length}})</span></label></li>
                     {{/each}}
                    </ul>
                 </form>
@@ -267,6 +268,14 @@
   for (let key in params) {
     if (!urlParams.has(key)) {
       urlParams.append(key, params[key]);
+    }
+  }
+
+  for (let key in params) {
+    let control = $(`#${key}${urlParams.get(key)}`);
+
+    if(control) {
+      $(control).prop('checked', true);
     }
   }
 
