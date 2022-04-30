@@ -89,14 +89,14 @@ $(function() {
     noUiSlider.create(nonLinearSlider, {
         connect: true,
         behaviour: 'tap',
-        start: [ 500, 4000 ],
+        start: [ urlParams.get('min'), urlParams.get('max') ],
         range: {
             // Starting at 500, step the value by 500,
             // until 4000 is reached. From there, step by 1000.
             'min': [ 0 ],
-            '10%': [ 500, 500 ],
-            '50%': [ 4000, 1000 ],
-            'max': [ 10000 ]
+            '10%': [ 50, 10 ],
+            '50%': [ 250, 50 ],
+            'max': [ 500 ]
         }
     });
   
@@ -110,6 +110,13 @@ $(function() {
     // from the left edge of the slider.
     nonLinearSlider.noUiSlider.on('update', function ( values, handle, unencoded, isTap, positions ) {
         nodes[handle].innerHTML = values[handle];
+    });
+
+    nonLinearSlider.noUiSlider.on('end', function (values, handle, unencoded, isTap, positions) {
+      let value = values[handle];
+      let keys = ['min', 'max'];
+
+      selectParam(keys[handle], value);
     });
   
   }
