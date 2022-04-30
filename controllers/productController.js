@@ -39,6 +39,7 @@ controller.getById = (id) => {
     })
     .then(result => {
       product = result;
+
       return models.ProductSpecification.findAll({
           where: {productId : id},
           include: [{model: models.Specification}]
@@ -46,6 +47,19 @@ controller.getById = (id) => {
     })
     .then(productSpecifications => {
       product.productSpecifications = productSpecifications;
+
+      return models.Comment.findAll({
+        where: {productId : id, parentCommentId: null},
+        include: [{model: models.User}, {
+          model: models.Comment,
+          as: 'SubComments',
+          include: [{model: models.User}]
+        }]
+      })
+    })
+    .then(comments => {
+      product.Comments = comments;
+      console.log(product);   
       resolve(product);
     })
     .catch(error => reject(new Error(error)));
