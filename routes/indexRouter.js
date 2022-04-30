@@ -7,6 +7,12 @@ router.get('/', (req, res, next) => {
   categoryController.getAll()
   .then(data => {
     res.locals.categories = data;
+    let productController = require('../controllers/productController');
+
+    return productController.getTrendingProducts();
+  })
+  .then(data => {
+    res.locals.trendingProducts = data;    
     res.render('index');
   })
   .catch(error => next(error));
