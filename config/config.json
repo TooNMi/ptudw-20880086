@@ -1,14 +1,14 @@
 {
     "development": {
         "username": "postgres",
-        "password": "postgres",
+        "password": "admin",
         "database": "aromadb",
         "host": "localhost",
         "dialect": "postgres"
     },
     "test": {
         "username": "postgres",
-        "password": "postgres",
+        "password": "admin",
         "database": "aromadb",
         "host": "localhost",
         "dialect": "postgres"

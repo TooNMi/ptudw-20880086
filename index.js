@@ -21,6 +21,15 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+//Sync database
+app.get('/sync', (req, res) => {
+  let models = require('./models');
+  models.sequelize.sync()
+  .then(() => {
+    res.send('Database sync completed!')
+  });
+});
+
 //Route for pages with banner
 app.get('/:page', (req, res) => {
   let banners = {
