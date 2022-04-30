@@ -13,11 +13,11 @@ controller.getAll = (query) => {
       }]
     };
 
-    if(query.category) {
+    if(query.category > 0) {
       options.include[0].where.categoryId = query.category;
     }
 
-    if(query.color) {
+    if(query.color > 0) {
       options.include[0].include = [{
         model: models.ProductColor,
         attributes: [],
