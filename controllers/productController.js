@@ -59,7 +59,14 @@ controller.getById = (id) => {
     })
     .then(comments => {
       product.Comments = comments;
-      console.log(product);   
+
+      return models.Review.findAll({
+        where: {productId : id},
+        include: [{model: models.User}]
+      });
+    })
+    .then(reviews => {
+      product.Reviews = reviews;
       resolve(product);
     })
     .catch(error => reject(new Error(error)));
