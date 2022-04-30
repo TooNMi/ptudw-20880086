@@ -33,6 +33,31 @@ app.get('/sync', (req, res) => {
   });
 });
 
+app.get('/sync', (req, res) => {
+  let models = require('./models');
+
+  console.log('Trying to connect to DB...')
+
+  models.sequelize.sync()
+  .then(() => {
+    res.send('Databased synced!')
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+});
+
+//Fix ico module missing
+app.use( function(req, res, next) {
+
+  if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
+    return res.sendStatus(204);
+  }
+
+  return next();
+
+});
+
 //Route for pages with banner
 app.get('/:page', (req, res) => {
   let banners = {
