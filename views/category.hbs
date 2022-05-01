@@ -62,14 +62,14 @@
           <!-- Start Filter Bar -->
           <div class="filter-bar d-flex flex-wrap align-items-center">
             <div class="sorting">
-              <select onchange="selectParam('sort', this.value)">
+              <select id="sort" onchange="selectParam('sort', this.value)">
                 <option value="name">Default sorting by name</option>
                 <option value="price">Sorting by price low to high</option>
                 <option value="overallReview">Sorting by reviews from high to low</option>
               </select>
             </div>
             <div class="sorting mr-auto">
-              <select onchange="selectParam('limit', this.value)">
+              <select id="limit" onchange="selectParam('limit', this.value)">
                 <option value="9">Show 9</option>
                 <option value="18">Show 18</option>
                 <option value="36">Show 36</option>
@@ -266,7 +266,11 @@
     brand: 0,
     color: 0,
     min: 0,
-    max: 500
+    max: 500,
+    limit: 9,
+    page: 1,
+    sort: 'name',
+    search: ''
   };
 
   for (let key in params) {
@@ -275,13 +279,17 @@
     }
   }
 
-  for (let key in params) {
+  let checkboxes = ['category', 'brand', 'color'];
+  for (let key in checkboxes) {
     let control = $(`#${key}${urlParams.get(key)}`);
 
     if(control) {
       $(control).prop('checked', true);
     }
   }
+
+  $('#sort').val(urlParams.get('sort'));
+  $('#limit').val(urlParams.get('limit'));
 
   function selectParam(key, value, reset = false) {
     if (reset) {
