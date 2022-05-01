@@ -62,7 +62,20 @@ app.use('/comments', require('./routes/commentRouter'));
 app.use('/reviews', require('./routes/reviewRouter'));
 app.use('/users', require('./routes/userRouter'));
 
+//Sync database
+app.get('/sync', (req, res) => {
+  let models = require('./models');
 
+  console.log('Trying to connect to DB...')
+
+  models.sequelize.sync()
+  .then(() => {
+    res.send('Databased synced!')
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+});
 
 //Route for pages with banner
 app.get('/:page', (req, res) => {
@@ -85,32 +98,7 @@ app.get('/:page', (req, res) => {
   res.render(page, {banner: banners[page]});
 })
 
-//Sync database
-/* app.get('/sync', (req, res) => {
-  let models = require('./models');
 
-  console.log('Trying to connect to DB...')
-
-  models.sequelize.sync().then(() => {
-    res.send('Database sync completed!');
-  }).catch((err) => {
-    console.log(err);
-  });
-}); */
-
-app.get('/sync', (req, res) => {
-  let models = require('./models');
-
-  console.log('Trying to connect to DB...')
-
-  models.sequelize.sync()
-  .then(() => {
-    res.send('Databased synced!')
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-});
 
 //Fix ico module missing
 app.use( function(req, res, next) {
