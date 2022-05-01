@@ -4,7 +4,8 @@ let userController = require('../controllers/userController');
 const { route } = require('./indexRouter');
 
 router.get('/login', (req, res) => {
-  res.render('login', {banner: 'Log In'});
+  req.session.returnURL = req.query.returnURL;
+  res.render('login');
 })
 
 router.post('/login', (req, res, next) => {
@@ -19,7 +20,13 @@ router.post('/login', (req, res, next) => {
       if (userController.comparePassword(password, user.password)) {
         req.session.cookie.maxAge = keepLoggedIn ? 30 * 24 * 60 * 60 * 1000 : null;
         req.session.user = user;
-        res.redirect('/');
+
+        if(req.session.returnURL) {
+          res.redirect(req.session.returnURL);
+        } else {
+          res.redirect('/');
+        }
+        
       } else {
         res.render('login', {
           message: 'Incorrect Password!',

@@ -21,4 +21,12 @@ controller.comparePassword = (password, hash) => {
   return bcrypt.compareSync(password, hash);
 }
 
+controller.isLoggedIn = (req, res, next) => {
+  if(req.session.user) {
+    next();
+  } else {
+    res.redirect(`/users/login?returnURL=${req.originalUrl}`)
+  }
+}
+
 module.exports = controller;
