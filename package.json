@@ -10,9 +10,12 @@
   "author": "Nguyen Minh Tu - 20880086",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-handlebars-paginate": "^1.0.3",
+    "express-session": "^1.17.2",
     "handlebars": "^4.5.3",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",

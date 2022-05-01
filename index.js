@@ -23,9 +23,39 @@ let hbs = expressHbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
+//Body parser
+let bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+//Cookie parser
+let cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+//Session
+let session = require('express-session');
+app.use(session({
+  cookie: {httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000},
+  secret: '53cret',
+  resave: false,
+  saveUninitialized: false
+}))
+
+//Use Cart Controller
+let Cart = require('./controllers/cartController');
+app.use((req, res, next) => {
+  let cart = new Cart(req.session.cart ? req.session.cart : {});
+  req.session.cart = cart;
+  res.locals.totalQuantity = cart.totalQuantity;
+
+  next();
+})
+
 //Set up routes
 app.use('/', require('./routes/indexRouter'));
 app.use('/products', require('./routes/productRouter'));
+app.use('/cart', require('./routes/cartRouter'));
+
 
 //Route for pages with banner
 app.get('/:page', (req, res) => {
