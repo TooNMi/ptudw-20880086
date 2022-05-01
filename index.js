@@ -48,6 +48,9 @@ app.use((req, res, next) => {
   req.session.cart = cart;
   res.locals.totalQuantity = cart.totalQuantity;
 
+  res.locals.fullname = req.session.user ? req.session.user.fullname : '';
+  res.locals.isLoggedIn = req.session.user ? true : false;
+
   next();
 })
 
@@ -57,6 +60,7 @@ app.use('/products', require('./routes/productRouter'));
 app.use('/cart', require('./routes/cartRouter'));
 app.use('/comments', require('./routes/commentRouter'));
 app.use('/reviews', require('./routes/reviewRouter'));
+app.use('/users', require('./routes/userRouter'));
 
 
 
