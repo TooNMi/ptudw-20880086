@@ -63,7 +63,7 @@ router.get('/', (req, res, next) => {
       totalRows: data.count
     };
 
-    res.render('category');
+    res.render('category', {banner: 'Shop Products'});
   })
   .catch(error => next(error))
 })
@@ -73,7 +73,7 @@ router.get('/:id', (req, res, next) => {
   productController.getById(req.params.id)
   .then(product => {
     res.locals.products = product;
-    res.render('single-product');
+    res.render('single-product', {banner: 'Shop Single'});
   })
   .catch(error => next(error));
 })

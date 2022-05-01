@@ -42,13 +42,14 @@ app.get('/:page', (req, res) => {
     'single-product': 'Shop Single',
     'tracking-order': 'Order Tracking'
   }
+  
   let page = req.params.page;
   console.log(banners[page]);
   res.render(page, {banner: banners[page]});
 })
 
 //Sync database
-app.get('/sync', (req, res) => {
+/* app.get('/sync', (req, res) => {
   let models = require('./models');
 
   console.log('Trying to connect to DB...')
@@ -58,7 +59,7 @@ app.get('/sync', (req, res) => {
   }).catch((err) => {
     console.log(err);
   });
-});
+}); */
 
 app.get('/sync', (req, res) => {
   let models = require('./models');
