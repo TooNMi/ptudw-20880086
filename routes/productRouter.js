@@ -36,7 +36,7 @@ router.get('/', (req, res, next) => {
 
   let categoryController = require('../controllers/categoryController');
 
-  categoryController.getAll()
+  categoryController.getAll(req.query)
   .then(data => {
     res.locals.categories = data;
     let brandController = require('../controllers/brandController');
